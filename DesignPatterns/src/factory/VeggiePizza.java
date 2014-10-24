@@ -2,28 +2,21 @@ package factory;
 
 public class VeggiePizza extends Pizza {
 
+	private IngredientFactory factory;
+	
+	public VeggiePizza(IngredientFactory factory) {
+		this.factory = factory;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see factory.Pizza#prepare()
+	 */
 	@Override
 	public void prepare() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void bake() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void cut() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void box() {
-		// TODO Auto-generated method stub
-
+		System.out.println("Prepairing pizza: " + getName());
+		setDough(this.factory.createDough());
+		setSauce(this.factory.createSauce());
 	}
 
 }
