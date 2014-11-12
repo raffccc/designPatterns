@@ -1,0 +1,30 @@
+*** Intent ***
+	- Provide an interface for creating families of related or dependent objects without 
+	specifying their concrete classes
+	
+*** Applicability ***
+	- System should be independent of how its products are created, composed and represented,
+	- System should be configured with one of multiple families of products,
+	- A family of related product objects is designed to be used together, and you need to enforce 
+	this constraint,
+	- You want to provide a class library of products, and you want to reveal just their interfaces, 
+	not their implementations.
+	
+Usually  only a single instance of a ConcreteFactory class is created at runtime.
+AbstractFactory defers creation of product objects to its ConcreteFactory subclass
+
+*** Consequences ***
+	- Isolates concrete classes
+	- Makes exchanging product families easy. A whole bunch of products are changed, just by 
+	changing the factory used.
+	- Promotes consistency among products
+	- Supporting new kinds of products is difficult. Once we change or include a method in the
+	AbstractFactory all of its subclasses must change.
+	
+*** Implementations ***
+- Factories as Singletons. Only one instance of a ConcreteFactory
+- Creating the products
+	- Factory Methods in the ConcreteProducts
+
+- Concrete factory is often a singleton
+- AbstractFactory classes are often implemented with factory methods.		
