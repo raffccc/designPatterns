@@ -1,0 +1,21 @@
+*** Intent ***
+	- Decouple an abstraction from its implementation so that the two can vary independently
+	
+*** Applicability ***
+	- You want to avoid a permanent binding between an abstraction and its implementation
+	- Both the abstractions and their implementations should be extensible by subclassing.
+	- Changes in the implementation of an abstraction should have no impact on clients
+	- You have a proliferation of classes.
+	- You want to share an implementation among multiple objects, and this fact should be hidden
+	from the client.
+	
+*** Consequences ***
+	- Decoupling interface and implementation
+	- Improved extensibility: You can extend Abstraction and Implementor hierarchies independently
+	- Hiding implementation details from clients
+	
+*** Implementation ***
+	- How, when and where do you decide which Implementor class to instantiate when there's more than one?
+		- The abstraction can receive a parameter on the constructor and decide de implementator based on it
+		- It's also possible to choose a default Implementor and based on usage change it later.
+	

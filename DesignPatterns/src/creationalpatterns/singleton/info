@@ -1,13 +1,15 @@
 *** Intent ***
-Convert the interface of a class into another interface clients expect. Adapter
-lets classes work together that couldn't otherwise because of incompatible 
-interfaces.
+	- Ensure a class only has one instance, and provide a global point of access to it
 	
 *** Applicability ***
-- You want to use an existing class, and its interface does not match the one you need
-- You want to create a reusable class that cooperates with unrelated or unforeseen classes,
-that is, classes that don't necessarily have compatible interfaces.
-- (Object adapter only) You need to use several existing subclasses, but it's
-impractical to adapt their interface by subclassing every one.
+	- There must be exactly one instance of a class, and it must be accessible to clients
+	from a well-knows access point.
+	- The sole instance should be extensible by subclassing, and clients should be
+	able to use an extended instance without modifying their code.
 	
 *** Consequences ***
+	- Controlled access to sole instance
+	- Reduced name space
+	- Permits refinement of operations and representation
+	- Permits a variable number of instances
+	- More flexible than class operations

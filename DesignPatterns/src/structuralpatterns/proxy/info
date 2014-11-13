@@ -1,0 +1,16 @@
+*** Intent ***
+	- Provide a surrogate or placeholder for another object to control access to it.
+	
+*** Applicability ***
+	- Whenever there is a need for a more versatile or sophisticated reference to an object than
+	a simple pointer. Commom situations:
+		- Remote Proxy provides local representative for an object in a different address space
+		- Virtual proxy creates expensive objects on demand
+		- Protection proxy controls access to the original object, useful when objects
+		should have different access rights.
+		- Smart reference: replacement for a bare pointer that performs additional actions when
+		an object is accessed. For example: closing and opening of database connections	
+	
+*** Consequences ***
+	
+*** Implementation ***	
