@@ -1,0 +1,62 @@
+*** Intent ***
+	- Define a one-to-many dependency between objects so that when one object changes state, 
+	all its dependents are notified and updated automatically.
+	
+*** Applicability ***
+	- When an abstraction has two aspects, one dependent on the other
+	- When a change to one object requires changing others, and you don't know how many objects need to be changed
+	- When an object should be able to notify other objects without making assumptions about who these objects are.
+	In other words, you don't want these objects tightly coupled.
+	
+*** Consequences ***
+	- Abstract coupling between Subject and Observer
+	- Support for broadcast communication
+	- Unexpected updates
+	
+	
+*** Implementation ***
+	- Mapping subjects to their observers:
+		- Most commom way is that the subject keep a list of references to the observers, this may be too expensive
+		when there are many subjects and few observers
+		- Another way is to use an associative look-up (ex: hash table) to maintain the subject-to-observer mapping.
+		
+	- Observing more than one subject
+		- It might make sense to extend the Update interface to let the observer know which subject is sensing the
+		notification.
+	
+	- Who triggers the update? Two options:
+		a) Setters on the subject call notify after they change the subject's state.
+			- Advantage: Clients don't have to remember to call notify on the subject
+			- Disadvantage: Consecutive operations will cause several consecutive updates
+			
+		b) Clients responsible for calling notify at the right time.
+			- Advantage: Client can wait to trigger the update until after a series of state changes has been made,
+			avoiding needless intermediate updates.
+			- Disadvantage: Clients have an added responsibility to trigger the update.
+			
+	- Dangling references to deleted subjects: Subject must notify its observers as it is deleted so that they can reset their
+	reference to it.
+	
+	- Making sure Subject state is self-consistent before notification
+	
+	- Avoiding observer-specific update protocols: the push and pull models
+		1) Push model: Subject sends observers detailed information about the change, whether they want it or not
+					   Might make observers less reusable, because Subject classes make assumptions about Observer classes that might
+					   not always be true.
+					   
+		2) Pull model: Subject sends nothing but the most minimal notification, and observers ask for details explicitly thereafter
+					   Might be inefficient, because Observer classes must ascertain what changed without help from the Subject.
+					   
+	- Specifying modifications of interest explicitly: Use aspects to notify only observers interested in a particular aspect, this
+	aspect will be passed as a parameter.
+	
+	- Encapsulating complex update semantics:
+		- Change-Manager: Object that maintains complex relationships. Three responsibilities:
+			1) It maps a subject to its observers and provides an interface to maintain this mapping.
+			This eliminates the need for subjects to maintain references to their observers and vice versa
+			
+			2) It defines a particular update strategy
+			
+			3) Updates all dependent observers at the request of a subject	
+	 
+		
